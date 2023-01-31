@@ -1,0 +1,177 @@
+Hooks => Hooks are function that use some react features in functional components 
+	(functions that make functional components work like class components)
+
+google Definition: Hooks are functions that let you “hook into” React state and lifecycle features from function components
+
+
+
+1. useState
+
+A function that add state in functional components.
+google Definition: The React useState Hook allows us to track state in a function component. 
+
+state => State is nothing but just values or variables of your component
+	The state is a built-in React object that is used to contain data or information about the component.
+
+USAGE:
+In order to use useState hook, we first import it, then inside of it we pass any type of data (default value),
+	and store it by using array destructuring. First variable is it's current value, and the second one
+	is the function for updating that value
+
+spread operator (...) => The JavaScript spread operator (...) allows us to quickly copy all or part of an 
+	existing array or object into another array or object.
+
+
+
+2. useEffect => used to perform side effects in our component
+	Side effects are actions which are performed with the 'outside world'
+	We perform side effect when we need to reach outside of our react components to do something
+	Example: fetching data from API, directly updating the DOM (document and window object),
+		timer functions (setTimeout, setInterval)
+
+google Definition: By using this Hook, you tell React that your component needs to do something after render. React will remember the function you passed (we'll refer to it as our “effect”),
+		 and call it later after performing the DOM updates.
+
+USAGE: 
+useEffect => Hook that accepts two arguments. First is callback, a function in which we write our side-effect logic.
+	This function is executed whenever something change in our component. And second, dependencies,
+	an array of variables (optional)
+	In simple terms, callback (what to run), dependencies (when to run)
+
+useEffect runs on every render, we can control that with dependencies
+
+If we compare it with class components useEffect is a combination of componentDidMount, componentDidUpdate, conponentWillUnmount
+
+
+We write callback funtion that is a side effect, and then in dependency array determine when to run it 
+	(on every re-render, on first render, on change of state)
+
+3 variations: -Without dependencies, with an empty array, with variables
+
+Timeouts, subscriptions, event listeners, and other effects that are no longer needed should be disposed with a clean up function
+
+
+3. useContext => Manages global data in react application: Global state, Themes, Services, User settings
+	useContext will create global data in our app, so we dont have to pass all our data through all child components
+	We can access that data in all component we need it
+
+USAGE:
+3 steps: 1.Creating the context, 2. Providing the context, 3. Consuming the context
+
+
+4. useRef 
+The useRef Hook allows you to persist values between renders.
+	It can be used to store a mutable value that does not cause a re-render when updated.
+	It can be used to access a DOM element directly.
+
+USAGE:
+const variableName = useRef(initialValue)
+
+First we pass default value of the variable (initialValue), that variable has only one object, and that object
+contains only one property, which is current.
+If we want to access it or update it we have to use (variableName).current
+We can also access elements by using the ref attribute inside of input
+
+**simple trick: console.log((variableName).current) => To see all the methods we can apply
+
+
+5. useReducer
+
+The useReducer Hook is similar to the useState Hook (used to manage state in our app)
+It allows for custom state logic.
+If you find yourself keeping track of multiple pieces of state that rely on complex logic, useReducer may be useful.
+When you have a lot of states and methods to handle
+
+USAGE:
+useReducer take two arguments, first one reducer in which we write all of the logic and second one is initial state
+which is object of all variables.
+This hook returns an array with two elements (array destructuring)
+First element is for current state (initial state)
+Second element is dispatch for updating that state (dispatch method)
+After that we define reducer function which has two parameters (state, action)
+First one is used to access current state, and second is an action used to get different actions
+So whatever we pass in dispatch function we can access it in reducer function by this action parameter
+And in that function we perform different tasks
+
+
+6. useLayoutEffect
+
+A useLayoutEffect hook is a React hook that can be passed through in a component's render method 
+to cause the react library to consider the page's layout and change its calculations for things like 
+spacing and overflow. 
+
+Works exactly the same as useEffect, difference is 'When it's run'
+
+useEffect runs AFTER the DOM is printed on the browser
+useLayoutEffect runs BEFORE the DOM is printed on the browser (whenever we want to run code before the DOM is printed)
+Example: (measuring element's height, width (anything related to layout))
+
+useLayoutEffect runs synchronously (first line runs, and then second line only after first line is completed)
+
+Most common use case of useLayoutEffect is to get the dimension of the layout
+
+USAGE:
+Same as useEffect
+
+
+7. useMemo
+
+Used to apply memoization in react
+
+Memoization => Technique for improving the performance of code, it is useful to avoid exprensive calculations
+	on every render when the returned value is not going to change
+
+Difference between useEffect and useMemo is that with useEffect we can't return the value and we can't store it in variable
+We have to create one more state variable and then with the set value function we can update that.
+But with useMemo we can return the value and we can store this value in variable
+
+-useMemo is used to improve performance of our react app
+
+-We can stop running unwanted functions on re-rendering
+
+USAGE:
+const **useMemoVariable = useMemo(callback, [dependancy])
+Takes two arguments
+1. callback => Which will return the value, and we will store that value in variable **useMemoVariable
+2. dependancy => Here we add variables, and when those variables change, only then callback will be run, and variable
+	**useMemoVariable will return the value
+
+So in useEffect we perform all side effects, and in useMemo all expensive functions and calculations
+
+
+8. useCallback
+
+The React useCallback Hook returns a memoized callback function.
+Also useful for preventing functions from being re-created on re-rendering
+
+useMemo returns memoize value
+useCallback returns memoize function
+
+in useCallback we can pass value as parameter (unlike useMemo)
+
+
+9. Custom hooks
+
+Custom hooks are basically a reusable function
+In simple terms, custom hooks are your own hooks that you create for your own use,
+and you can use them multiple times in your project
+
+We usually create them to not repeat ourselves
+
+Custom hooks are your logic which you created as reusable function
+
+You can use multiple hooks and create something that will help you to skip repeated tasks in your projects
+
+
+
+
+
+
+
+
+
+
+
+
+
+
